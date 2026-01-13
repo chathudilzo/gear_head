@@ -45,6 +45,8 @@ dependencies:
   path_provider:
   permission_handler:
   intl:
+  flutter_map: ^8.2.0
+  latlong2:
 
 dev_dependencies:
   flutter_test:

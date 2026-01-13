@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gear_head/core/theme/app_colors.dart';
+import 'package:gear_head/features/dashboard/data/chart_notifier.dart';
 import 'package:gear_head/features/dashboard/data/mock_obd_service.dart';
 import 'package:gear_head/features/dashboard/presentation/widgets/gauge_painter.dart';
+import 'package:gear_head/features/dashboard/presentation/widgets/performance_chart.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -10,6 +12,8 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final vehicleData = ref.watch(vehcileStreamProvider);
+    final rpmPoints = ref.watch(chartProvider('rpm'));
+
     return Scaffold(
       appBar: AppBar(
         title: Text("GEARHEAD TELEMETRY"),
@@ -48,6 +52,10 @@ class DashboardScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  PerformanceChart(rpmPoints: rpmPoints),
                   SizedBox(
                     height: 50,
                   ),
