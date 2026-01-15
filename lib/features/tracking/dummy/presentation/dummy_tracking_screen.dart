@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gear_head/core/theme/app_colors.dart';
-import 'package:gear_head/features/tracking/data/tracking_provider.dart';
+import 'package:gear_head/features/tracking/dummy/data/tracking_provider.dart';
 import 'package:latlong2/latlong.dart';
 
-class TrackingScreen extends ConsumerWidget {
-  const TrackingScreen({super.key});
+class DummyTrackingScreen extends ConsumerWidget {
+  const DummyTrackingScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,7 +54,39 @@ class TrackingScreen extends ConsumerWidget {
                         size: 40,
                       ))
                 ])
-              ])
+              ]),
+          if (!isSafe)
+            Positioned(
+                child: _GeofenceAlertCard(), bottom: 30, left: 20, right: 20)
+        ],
+      ),
+    );
+  }
+}
+
+class _GeofenceAlertCard extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      decoration: BoxDecoration(
+          color: AppColors.danger,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)]),
+      child: Row(
+        children: [
+          Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.white,
+            size: 28,
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          Expanded(
+              child: Text(
+            "GEOFENCE BREACH!\nVehicle has left the safe zone.",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ))
         ],
       ),
     );

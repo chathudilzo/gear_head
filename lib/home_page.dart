@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gear_head/core/theme/app_colors.dart';
 import 'package:gear_head/features/dashboard/presentation/dashboard_screen.dart';
-import 'package:gear_head/features/tracking/presentation/tracking_screen.dart';
+import 'package:gear_head/features/maintenance/presentation/history_screen.dart';
+import 'package:gear_head/features/tracking/dummy/presentation/dummy_tracking_screen.dart';
+
+import 'features/tracking/tracking_screen_main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +18,8 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _screens = [
     const DashboardScreen(),
-    const TrackingScreen()
+    const TrackingScreen(),
+    const HistoryScreen()
   ];
 
   @override
@@ -30,7 +34,8 @@ class _HomePageState extends State<HomePage> {
           onTap: (index) => setState(() => _currentIndex = index),
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Dash"),
-            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map")
+            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
+            BottomNavigationBarItem(icon: Icon(Icons.history), label: "History")
           ]),
     );
   }
