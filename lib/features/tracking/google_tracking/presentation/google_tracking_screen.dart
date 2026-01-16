@@ -25,18 +25,28 @@ class GoogleTrackingScreen extends ConsumerWidget {
             initialCameraPosition:
                 CameraPosition(target: centerPoint, zoom: 15),
             myLocationButtonEnabled: false,
-            circles: {
-              Circle(
-                  circleId: CircleId("geofense_1"),
-                  center: centerPoint,
-                  radius: 300,
+            circles: mySafeZones.map((zone) {
+              return Circle(
+                  circleId: CircleId(zone.id),
+                  center: zone.center,
+                  radius: zone.radius,
                   fillColor: vehicleState.isSafe
                       ? AppColors.primaryAccent.withOpacity(0.1)
                       : AppColors.danger.withOpacity(0.2),
                   strokeColor: vehicleState.isSafe
                       ? AppColors.primaryAccent
                       : AppColors.danger,
-                  strokeWidth: 2)
+                  strokeWidth: 2);
+            }).toSet(),
+            polylines: {
+              Polyline(
+                  polylineId: PolylineId("trip_trail"),
+                  points: vehicleState.breadcrumbs,
+                  color: AppColors.primaryAccent,
+                  width: 4,
+                  jointType: JointType.round,
+                  startCap: Cap.roundCap,
+                  endCap: Cap.roundCap)
             },
             markers: {
               Marker(

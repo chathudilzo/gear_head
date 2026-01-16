@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gear_head/core/theme/app_colors.dart';
 import 'package:gear_head/features/maintenance/data/database/database.dart';
+import 'package:gear_head/features/maintenance/presentation/log_detail_screen.dart';
 import 'package:gear_head/main.dart';
 
 class HistoryScreen extends ConsumerWidget {
@@ -53,6 +54,12 @@ class AlertCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => LogDetailsScreen(log: log)));
+        },
         contentPadding: EdgeInsets.all(16),
         leading: CircleAvatar(
           backgroundColor: AppColors.danger,

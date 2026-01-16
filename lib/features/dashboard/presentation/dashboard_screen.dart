@@ -61,7 +61,7 @@ class DashboardScreen extends ConsumerWidget {
                         height: 180,
                         child: PerformanceChart(rpmPoints: rpmPoints)),
                     SizedBox(
-                      height: 5,
+                      height: 20,
                     ),
                     // Row(
                     //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -70,6 +70,30 @@ class DashboardScreen extends ConsumerWidget {
                     //     _buildStatCard("ENGINE", "STABLE")
                     //   ],
                     // )
+
+                    _buildPredictiveCard(
+                      title: "Oil Condition",
+                      value: "${(data['oil'] ?? 0.0).toStringAsFixed(1)}%",
+                      subtitle: (data['rpm'] ?? 0.0) > 4000
+                          ? "DEGRADING FAST: High RPM Detected"
+                          : "Status: Optimal Performance",
+                      color: (data['oil'] ?? 0.0) < 20
+                          ? Colors.red
+                          : AppColors.primaryAccent,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    _buildPredictiveCard(
+                      title: "Coolant Health",
+                      value: "${(data['coolant'] ?? 0.0).toStringAsFixed(1)}%",
+                      subtitle: (data['temp'] ?? 0.0) > 102
+                          ? "SYSTEM STRESSED: High Heat detected"
+                          : "Status: Normal Operating Temp",
+                      color: (data['temp'] ?? 0.0) > 102
+                          ? Colors.orange
+                          : Colors.blueAccent,
+                    ),
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -188,6 +212,81 @@ class DashboardScreen extends ConsumerWidget {
                 fontSize: 10, color: alertColor ?? AppColors.primaryAccent),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildPredictiveCard(
+      {required String title,
+      required String value,
+      required String subtitle,
+      required Color color}) {
+    return Card(
+      color: AppColors.surface,
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+                Text(
+                  value,
+                  style: TextStyle(
+                      color: color, fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: LinearProgressIndicator(
+                value: double.parse(value.replaceAll("%", '')) / 100,
+                backgroundColor: Colors.white,
+                color: color,
+                minHeight: 8,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Icon(
+                  subtitle.contains("FAST")
+                      ? Icons.bolt
+                      : Icons.check_circle_outline_outlined,
+                  size: 14,
+                  color:
+                      subtitle.contains("FAST") ? Colors.orange : Colors.green,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                    child: Text(
+                  subtitle,
+                  style: TextStyle(
+                      fontSize: 12,
+                      color: subtitle.contains("FAST")
+                          ? Colors.orange
+                          : Colors.white,
+                      fontWeight: subtitle.contains("FAST")
+                          ? FontWeight.bold
+                          : FontWeight.normal),
+                ))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
