@@ -1,0 +1,64 @@
+{
+  "scenarios": [
+    {
+      "id": "mustang_overheat",
+      "carModel": "2024 Ford Mustang GT",
+      "title": "Engine Overheating",
+      "faultCode": "P0118",
+      "fuel": 45.0,
+      "oil": 80.0,
+      "heat": 115.0,
+      "userQuery": "The temp gauge is in the red and I'm stuck in traffic near Kandy. Should I turn the car off or will the fans handle it?"
+    },
+    {
+      "id": "prius_battery",
+      "carModel": "2022 Toyota Prius Hybrid",
+      "title": "Hybrid Battery Imbalance",
+      "faultCode": "P0A80",
+      "fuel": 60.0,
+      "oil": 95.0,
+      "heat": 88.0,
+      "userQuery": "My 'Check Hybrid System' light came on. The car feels sluggish when I pull away from a stop. Is my main battery dying?"
+    },
+    {
+      "id": "mustang_oil",
+      "carModel": "2024 Ford Mustang GT",
+      "title": "Oil Pressure Sensor Circuit",
+      "faultCode": "P0520",
+      "fuel": 80.0,
+      "oil": 15.0,
+      "heat": 92.0,
+      "userQuery": "I just saw a 'Low Oil Pressure' warning. I checked the dipstick and it looks okay. Is it safe to drive to Colombo or is the sensor lying?"
+    },
+    {
+      "id": "vitz_transmission",
+      "carModel": "2019 Toyota Vitz",
+      "title": "CVT Transmission Slip",
+      "faultCode": "P0700",
+      "fuel": 30.0,
+      "oil": 85.0,
+      "heat": 105.0,
+      "userQuery": "The engine revs up but the car doesn't speed up properly, especially on hills. Is my gearbox failing?"
+    },
+    {
+      "id": "mustang_maf",
+      "carModel": "2024 Ford Mustang GT",
+      "title": "Mass Air Flow Performance",
+      "faultCode": "P0101",
+      "fuel": 20.0,
+      "oil": 88.0,
+      "heat": 95.0,
+      "userQuery": "The engine is idling really roughly and it nearly stalled at a red light. Could it be bad fuel or a sensor issue?"
+    },
+    {
+      "id": "aqua_voltage",
+      "carModel": "2021 Toyota Aqua",
+      "title": "Low System Voltage",
+      "faultCode": "P0562",
+      "fuel": 55.0,
+      "oil": 90.0,
+      "heat": 85.0,
+      "userQuery": "My dashboard lights are flickering and the power steering felt heavy for a second. Is my 12V auxiliary battery failing?"
+    }
+  ]
+}

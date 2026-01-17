@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gear_head/core/theme/app_colors.dart';
+import 'package:gear_head/features/ai_chat/data/chat_provider.dart';
+import 'package:gear_head/features/ai_chat/presentation/ai_chat_sheet.dart';
 import 'package:gear_head/features/dashboard/data/chart_notifier.dart';
 import 'package:gear_head/features/dashboard/data/mock_obd_service.dart';
 import 'package:gear_head/features/dashboard/presentation/widgets/gauge_painter.dart';
@@ -15,6 +17,19 @@ class DashboardScreen extends ConsumerWidget {
     final rpmPoints = ref.watch(chartProvider('rpm'));
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.psychology_alt),
+        onPressed: () async {
+          final scenario =
+              await ref.read(chatProvider.notifier).getRandomScenario();
+          //if (!mounted) return;
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) => AiChatSheet(scenario: scenario));
+        },
+      ),
       appBar: AppBar(
         title: Text("GEARHEAD TELEMETRY"),
         backgroundColor: Colors.transparent,

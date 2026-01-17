@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gear_head/core/theme/app_colors.dart';
+import 'package:gear_head/features/remote/presentation/app_drawer.dart';
 import 'package:o3d/o3d.dart';
 
 class RemoteControllScreen extends StatefulWidget {
@@ -36,6 +37,13 @@ class _RemoteControllScreenState extends State<RemoteControllScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.segment_rounded,
+                color: Colors.white), // Stylized menu icon
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
         title: Column(
           children: [
             const Text("FORD MUSTANG",
@@ -63,6 +71,7 @@ class _RemoteControllScreenState extends State<RemoteControllScreen> {
         ),
         centerTitle: true,
       ),
+      drawer: GearHeadDrawer(),
       body: Stack(children: [
         Positioned.fill(
           child: Container(
@@ -129,7 +138,6 @@ class _RemoteControllScreenState extends State<RemoteControllScreen> {
                                   await _o3dController.availableAnimations();
                               print(animations);
 
-                              // In a real car, this sends a signal to the ECU
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text("Lights Flashing...")),
@@ -212,7 +220,7 @@ class _RemoteControllScreenState extends State<RemoteControllScreen> {
                 style: TextStyle(color: Colors.grey, fontSize: 10),
               ),
               Text(
-                "32^C",
+                "32\u00B0C",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               )
             ],

@@ -1,8 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gear_head/core/theme/app_colors.dart';
 import 'package:gear_head/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:gear_head/features/maintenance/data/database/database.dart';
+import 'package:gear_head/firebase_options.dart';
 import 'package:gear_head/home_page.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -18,8 +20,7 @@ final alertStreamProvider = StreamProvider<List<AlertLog>>((ref) {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  final dir = await getApplicationCacheDirectory();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const ProviderScope(child: const GearheadApp()));
 }
